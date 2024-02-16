@@ -30,7 +30,7 @@ async def start(bot: Client, msg: Message):
                 ],
                 [
                     InlineKeyboardButton("السـورس", url="https://t.me/WX_PM"),
-                    InlineKeyboardButton("𓏺 َDeَV Tٕeَtِo .", user_id=6133404544)
+                    InlineKeyboardButton("𓏺 َDeَV Tٕeَtِo .", user_id=6975380739)
                 ]
             ]
         ),
