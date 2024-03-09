@@ -12,7 +12,7 @@ async def start(bot: Client, msg: Message):
     me2 = (await bot.get_me()).mention
     await bot.send_message(
         chat_id=msg.chat.id,
-        text=f"""📟¦اهلا بـك عزيـزي {msg.from_user.mention}
+        text=f"""📟 ¦اهلا بـك عزيـزي {msg.from_user.mention}
 🖱 ¦ يـمكنك استـخـراج الـتـالـي 📥
 📟 ¦ تيرمـكـس تليثون للحسـابـات 🥷
 📡 ¦ تيرمـكـس تليثون للبوتــات 🎭
@@ -22,7 +22,7 @@ async def start(bot: Client, msg: Message):
 
 - يعمـل هـذا البـوت لمساعدتـك بطريقـة سهلـه للحصـول على كـود تيرمكـس لتشغيل تلـيثون والبايروجرام لتشغيل سـورس اغــاني تم انشـاء هـذا البـوت
 
-بواسطـة : [𓏺 َDeَV Tٕeَtِo .](tg://user?id=6975380739) """,
+بواسطـة : [˹ ᴏɢ ✗ ᴛᴇᴛᴏ ˼](tg://user?id=6975380739) """,
         reply_markup=InlineKeyboardMarkup(
             [
                 [
@@ -30,7 +30,7 @@ async def start(bot: Client, msg: Message):
                 ],
                 [
                     InlineKeyboardButton("السـورس", url="https://t.me/WX_PM"),
-                    InlineKeyboardButton("𓏺 َDeَV Tٕeَtِo .", user_id=6975380739)
+                    InlineKeyboardButton("˹ ᴏɢ ✗ ᴛᴇᴛᴏ ˼", user_id=6975380739)
                 ]
             ]
         ),
