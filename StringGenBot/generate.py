@@ -69,12 +69,12 @@ async def generate_session(bot: Client, msg: Message, telethon=False, old_pyro: 
     if telethon:
         ty = "تـيلـثـون"
     else:
-        ty = "بـايروجرام"
+        ty = "بـايـࢪوجـࢪام"
         if not old_pyro:
             ty += " ᴠ2"
     if is_bot:
         ty += " بـوت"
-    await msg.reply(f"» » ❄ ¦ بدء إنشـاء جلسه **{ty}** ...")
+    await msg.reply(f"» » ❄ ¦ بـدء إنـشـاء جـلسـة **{ty}** ...")
     user_id = msg.chat.id
     api_id_msg = await bot.ask(user_id, "🎮حسنـا قم بأرسال الـ API_ID\n\nاضغط /skip عشان تكمل بالرقم بس.", filters=filters.text)
     if await cancelled(api_id_msg):
@@ -93,17 +93,17 @@ async def generate_session(bot: Client, msg: Message, telethon=False, old_pyro: 
             return
         api_hash = api_hash_msg.text
     if not is_bot:
-        t = "⌔ 📞 الرجـاء إرسـال رقـم هاتفـك\nمثال : +201098901×××"
+        t = "✦ يرجـى إرسـال الكـود الذي وصـلك ,\nمثال :+201095539××××"
     else:
-        t = "⌔ ارسل الان توكن بوتك BOT_TOKEN\n⌔ مثل : `5432198765:abcdanonymousterabaaplol`'"
+        t = "⌔ اࢪسـل الان توكن بوتك BOT_TOKEN\n⌔ مثل : `5432198765:abcdanonymousterabaaplol`'"
     phone_number_msg = await bot.ask(user_id, t, filters=filters.text)
     if await cancelled(phone_number_msg):
         return
     phone_number = phone_number_msg.text
     if not is_bot:
-        await msg.reply("⌔ جـاري إرسـال الكـود ✉.....")
+        await msg.reply("»⬇️انتـظر لـحظـه سـوف نـرسـل كـود لحسابـك بالتليجـرام.")
     else:
-        await msg.reply("⌔ محاولة تسجيل الدخول عبـر توكن البوت...")
+        await msg.reply("⌔ محاولة تسجيل الدخول عبࢪ توكن البوت...")
     if telethon and is_bot:
         client = TelegramClient(StringSession(), api_id, api_hash)
     elif telethon:
@@ -131,7 +131,7 @@ async def generate_session(bot: Client, msg: Message, telethon=False, old_pyro: 
     try:
         phone_code_msg = None
         if not is_bot:
-            phone_code_msg = await bot.ask(user_id, "[ارسل الكود زي اللي في الصوره](https://telegra.ph/file/da1af082c6b754959ab47.jpg)✦ يرجـى إرسـال الكـود الي وصـلك.\n إذا كان الرمز هو 12345, يرجى إرساله مثـل 1 2 3 4 5.", filters=filters.text, timeout=600)
+            phone_code_msg = await bot.ask(user_id, "[ارسل الكود زي اللي في الصوره](https://telegra.ph/file/da1af082c6b754959ab47.jpg)» 🔍من فضلك افحص حسابك بالتليجرام وتفقد الكود من حساب اشعارات التليجرام. إذا كان\n  هناك تحقق بخطوتين( المرور ) ، أرسل كلمة المرور هنا بعد ارسال كود الدخول بالتنسيق أدناه.- اذا كانت كلمة المرور او الكود  هي\n 12345 يرجى ارسالها بالشكل التالي 1 2 3 4 5 مع وجود مسـافـات بين الارقام اذا احتجت مساعدة @WZAERE.", filters=filters.text, timeout=600)
             if await cancelled(phone_code_msg):
                 return
     except TimeoutError:
@@ -185,7 +185,7 @@ async def generate_session(bot: Client, msg: Message, telethon=False, old_pyro: 
     except KeyError:
         pass
     await client.disconnect()
-    await bot.send_message(msg.chat.id, "» » ✅تم استخراج الجلسه بنجاح {} \🔍من فضلك تفحص الرسايل المحفوظه بحسابك!  ! \n⌔ **˹ ᴏɢ ✗ ᴛᴇᴛᴏ ˼** @wzaere".format("تـيـلـثـون" if telethon else "بايروجـرام"))
+    await bot.send_message(msg.chat.id, "» » ✅تم استخراج الجلسه بنجاح {} \🔍من فضلك تفحص الرسايل المحفوظه بحسابك!  ! \n⌔ **˹ ᴏɢ ✗ ᴛᴇᴛᴏ ˼** @WZAERE".format("تـيـلـثـون" if telethon else "بـايـࢪوجـࢪام"))
 
 
 async def cancelled(msg):
