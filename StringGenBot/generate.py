@@ -1,3 +1,4 @@
+from data import Data
 from pyrogram.types import Message
 from telethon import TelegramClient
 from pyrogram import Client, filters
@@ -32,78 +33,62 @@ from telethon.errors import (
 
 import config
 
-
-
-ask_ques = "**⌔ ذا كنـت تـريد تنـصيـب سـورس مـيوزك\nفـأختـار بـايـروجـرام\n⌔ واذا تـريـد تنـصـيب التليثون\nفـأخـتار تيرمكـس\n⌔ اذا كنـت سـورسـك مـتحـدث مـع اخـر\nتحديثات الـباروجـرام فا اخـتار بـايـروجـرام [New] \n⌔ يوحد استخرجات جـلسـات لـي البـوتات :**"
-
-
+ask_ques= "📟 ¦ اهلا بـك عزيـزي في بوت الاستخراج\n🖱 ¦ يـمكنك استـخـراج الـتـالـي 📥\n📟 ¦ تيرمـكـس تليثون للحسـابـات 🥷\n📡 ¦ تيرمـكـس تليثون للبوتــات 🎭\n🎸 ¦ بايـروجـرام مـيوزك للحسابات 🥷\n🔮 ¦ بايـروجـرام مـيوزك للبوتات 🎭\n🔗 ¦ بايـروجـرام مـيوزك احدث اصدار 📀\n- يعمـل هـذا البـوت لمساعدتـك بطريقـة سهلـه للحصـول على كـود تيرمكـس لتشغيل تلـيثون والبايروجرام لتشغيل سـورس اغــاني تم انشـاء هـذا البـوت\nبواسطـة : [₍ ƚ ᥱ ƚ ᥆ || تـيـ ٖ ـتـو ⁾ ↺](https://t.me/ToPTeTo)"
 buttons_ques = [
     [
-        InlineKeyboardButton(" بـايروجـرام ", callback_data="pyrogram1"),
-        InlineKeyboardButton(" بـايروجـرام v2 ", callback_data="pyrogram"),
+        InlineKeyboardButton("‹ بايروجرام ›", callback_data="pyrogram1"),
+        InlineKeyboardButton("‹ بايروجرام V2 ›", callback_data="pyrogram"),
     ],
     [
-        InlineKeyboardButton(" تـليـثـون ", callback_data="telethon"),
+        InlineKeyboardButton("‹ تيلثون ›", callback_data="telethon"),
     ],
     [
-        InlineKeyboardButton(" بـايروجـرام بـوت ", callback_data="pyrogram_bot"),
-        InlineKeyboardButton(" تـليـثـون بـوت ", callback_data="telethon_bot"),
+        InlineKeyboardButton("‹ بايروجرام بوت ›", callback_data="pyrogram_bot"),
+        InlineKeyboardButton("‹ بوت تيلثون ›", callback_data="telethon_bot"),
     ],
 ]
 
-gen_button = [
-    [
-        InlineKeyboardButton(text="📥↫اطغط لبدا استخراج كود↬📥", callback_data="generate")
-    ]
-]
 
-
-
-
-@Client.on_message(filters.private & ~filters.forwarded & filters.command(["generate", "gen", "string", "str"]))
+@Client.on_message(filters.private & ~filters.forwarded & filters.command('generate'))
 async def main(_, msg):
     await msg.reply(ask_ques, reply_markup=InlineKeyboardMarkup(buttons_ques))
 
 
 async def generate_session(bot: Client, msg: Message, telethon=False, old_pyro: bool = False, is_bot: bool = False):
     if telethon:
-        ty = "تـيلـثـون"
+        ty = "‹ تيلثون ›"
     else:
-        ty = "بـايـࢪوجـࢪام"
+        ty = "‹ بايروجرام V2 ›"
         if not old_pyro:
-            ty += " ᴠ2"
+            ty += " v2"
     if is_bot:
-        ty += " بـوت"
-    await msg.reply(f"» » ❄ ¦ بـدء إنـشـاء جـلسـة **{ty}** ...")
+        ty += " Bot"
+    await msg.reply(f"↢ جاري بدا انشاء جلسه {ty} ...")
     user_id = msg.chat.id
-    api_id_msg = await bot.ask(user_id, "🎮حسنـا قم بأرسال الـ API_ID\n\nاضغط /skip عشان تكمل بالرقم بس.", filters=filters.text)
+    api_id_msg = await bot.ask(user_id, 'Tolong Kirim `API_ID`', filters=filters.text)
     if await cancelled(api_id_msg):
         return
-    if api_id_msg.text == "/skip":
-        api_id = config.API_ID
-        api_hash = config.API_HASH
-    else:
-        try:
-            api_id = int(api_id_msg.text)
-        except ValueError:
-            await api_id_msg.reply("⌔ يجب ان يكون ايبي ايدي عدداً صحيحاً \n⌔ يࢪجي المحـاولة مـࢪة أخـࢪى...", quote=True, reply_markup=InlineKeyboardMarkup(gen_button))
-            return
-        api_hash_msg = await bot.ask(user_id, "» » 🎮حسنـا قم بأرسال الـ API_HASH", filters=filters.text)
-        if await cancelled(api_hash_msg):
-            return
-        api_hash = api_hash_msg.text
+    try:
+        api_id = int(api_id_msg.text)
+    except ValueError:
+        await api_id_msg.reply('🎮 حسنـا قم بأرسال الـ API_ID\n\nاضغط /skip عشان تكمل بالرقم بس.', quote=True, reply_markup=InlineKeyboardMarkup(Data.generate_button))
+        return
+    api_hash_msg = await bot.ask(user_id, '🎮حسنـا قم بأرسال الـ API_HASH', filters=filters.text)
+    if await cancelled(api_hash_msg):
+        return
+    api_hash = api_hash_msg.text
     if not is_bot:
-        t = "✦ يرجـى إرسـال الكـود الذي وصـلك ,\nمثال :+201095539××××"
+        t = "Sekarang tolong kirimkan `PHONE_NUMBER` Beserta Kode Negaranya. \nExample : `+19876543210`'"
     else:
-        t = "⌔ اࢪسـل الان توكن بوتك BOT_TOKEN\n⌔ مثل : `5432198765:abcdanonymousterabaaplol`'"
+        t = "Sekarang tolong kirimkan `BOT_TOKEN` \nExample : `12345:abcdefghijklmnopqrstuvwxyz`'"
     phone_number_msg = await bot.ask(user_id, t, filters=filters.text)
     if await cancelled(phone_number_msg):
         return
     phone_number = phone_number_msg.text
     if not is_bot:
-        await msg.reply("»⬇️انتـظر لـحظـه سـوف نـرسـل كـود لحسابـك بالتليجـرام.")
+        await msg.reply("Mengirim OTP...")
     else:
-        await msg.reply("⌔ محاولة تسجيل الدخول عبࢪ توكن البوت...")
+        await msg.reply("Masuk sebagai Pengguna Bot...")
     if telethon and is_bot:
         client = TelegramClient(StringSession(), api_id, api_hash)
     elif telethon:
@@ -123,19 +108,19 @@ async def generate_session(bot: Client, msg: Message, telethon=False, old_pyro: 
             else:
                 code = await client.send_code(phone_number)
     except (ApiIdInvalid, ApiIdInvalidError, ApiIdInvalid1):
-        await msg.reply("» يقلب ᴀᴩɪ_ɪᴅ و ᴀᴩɪ_ʜᴀsʜ\nبتوع اك محذوف.\nاعمل استرت يقلب عشن تبدا من الاول.", reply_markup=InlineKeyboardMarkup(gen_button))
+        await msg.reply('`API_ID` Dan `API_HASH` Kombinasi Tidak Valid/Salah, Mulai Ulang /start generating session.', reply_markup=InlineKeyboardMarkup(Data.generate_button))
         return
     except (PhoneNumberInvalid, PhoneNumberInvalidError, PhoneNumberInvalid1):
-        await msg.reply("» يقلب الرقم مش معمول بيه اكونت\nاصلا علي التلي.\nاعمل استرت وابدا من الاول وابعت الرقم متخفش.", reply_markup=InlineKeyboardMarkup(gen_button))
+        await msg.reply('`PHONE_NUMBER` Tidak Valid. Tolong Mulai Ulang /start generating session.', reply_markup=InlineKeyboardMarkup(Data.generate_button))
         return
     try:
         phone_code_msg = None
         if not is_bot:
-            phone_code_msg = await bot.ask(user_id, "[ارسل الكود زي اللي في الصوره](https://telegra.ph/file/da1af082c6b754959ab47.jpg)» 🔍من فضلك افحص حسابك بالتليجرام وتفقد الكود من حساب اشعارات التليجرام. إذا كان\n  هناك تحقق بخطوتين( المرور ) ، أرسل كلمة المرور هنا بعد ارسال كود الدخول بالتنسيق أدناه.- اذا كانت كلمة المرور او الكود  هي\n 12345 يرجى ارسالها بالشكل التالي 1 2 3 4 5 مع وجود مسـافـات بين الارقام اذا احتجت مساعدة @ToPTeTo.", filters=filters.text, timeout=600)
+            phone_code_msg = await bot.ask(user_id, "Silahkan Periksa **OTP** Di Akun Telegram Resmi Kamu. Jika kamu mendapatkan kode OTP, kirim OTP ke sini setelah membaca format di bawah ini \nIf OTP is `12345`, **Tolong Kirim OTP sebagai Berikut Contoh!** `1 2 3 4 5`.", filters=filters.text, timeout=600)
             if await cancelled(phone_code_msg):
                 return
     except TimeoutError:
-        await msg.reply("⌔ تم انتهاء وقت انشاء الجلسه\n⌔ يرجى محاولة انشاء الجلسة من البداية.", reply_markup=InlineKeyboardMarkup(gen_button))
+        await msg.reply('Batas waktu mencapai 10 menit. Silakan mulai membuat sesi lagi.', reply_markup=InlineKeyboardMarkup(Data.generate_button))
         return
     if not is_bot:
         phone_code = phone_code_msg.text.replace(" ", "")
@@ -145,16 +130,16 @@ async def generate_session(bot: Client, msg: Message, telethon=False, old_pyro: 
             else:
                 await client.sign_in(phone_number, code.phone_code_hash, phone_code)
         except (PhoneCodeInvalid, PhoneCodeInvalidError, PhoneCodeInvalid1):
-            await msg.reply("⌔ كود التحقق الذي ارسلته غير صحيح\n⌔ يرجى المحاولة مرة أخرى... ", reply_markup=InlineKeyboardMarkup(gen_button))
+            await msg.reply('OTP tidak valid. Silakan mulai membuat sesi lagi.', reply_markup=InlineKeyboardMarkup(Data.generate_button))
             return
         except (PhoneCodeExpired, PhoneCodeExpiredError, PhoneCodeExpired1):
-            await msg.reply("⌔ انتهت صلاحية  كود التحقق الذي أرسلته\n⌔ يرجى المحاولة مرة أخرى... ", reply_markup=InlineKeyboardMarkup(gen_button))
+            await msg.reply('OTP sudah habis masa berlakunya. Silakan mulai membuat sesi lagi.', reply_markup=InlineKeyboardMarkup(Data.generate_button))
             return
         except (SessionPasswordNeeded, SessionPasswordNeededError, SessionPasswordNeeded1):
             try:
-                two_step_msg = await bot.ask(user_id, "⌔ يرجي إرسال كلمة مرور التحقق بخطوتين للمتابعة", filters=filters.text, timeout=300)
+                two_step_msg = await bot.ask(user_id, 'Akun kamu telah mengaktifkan verifikasi dua langkah. Harap berikan kata sandinya.', filters=filters.text, timeout=300)
             except TimeoutError:
-                await msg.reply("» تم انتهاء وقت الجلسه 5 دقائق يرجى اعاده استخراج الجلسه من البدايه.", reply_markup=InlineKeyboardMarkup(gen_button))
+                await msg.reply('Batas waktu mencapai 5 menit. Silakan mulai membuat sesi lagi.', reply_markup=InlineKeyboardMarkup(Data.generate_button))
                 return
             try:
                 password = two_step_msg.text
@@ -165,21 +150,11 @@ async def generate_session(bot: Client, msg: Message, telethon=False, old_pyro: 
                 if await cancelled(api_id_msg):
                     return
             except (PasswordHashInvalid, PasswordHashInvalidError, PasswordHashInvalid1):
-                await two_step_msg.reply("⌔ كلمة المرور التي أرسلتها غير صحيحة\n⌔ يرجى المحاولة مرة أخرى...", quote=True, reply_markup=InlineKeyboardMarkup(gen_button))
+                await two_step_msg.reply('Kata Sandi yang Diberikan Tidak Valid. Silakan mulai membuat sesi lagi.', quote=True, reply_markup=InlineKeyboardMarkup(Data.generate_button))
                 return
     else:
         if telethon:
             await client.start(bot_token=phone_number)
-        else:
-            await client.sign_in_bot(phone_number)
-    if telethon:
-        string_session = client.session.save()
-    else:
-        string_session = await client.export_session_string()
-    text = f"**جلستك يبروو  ʙᴏᴛ sᴛʀɪɴɢ sᴇssɪᴏɴ {ty} ** \n\n`{string_session}` \n\n⌔ **ɢᴇɴᴇʀᴀᴛᴇᴅ ʙʏ :**@al11ibot\n🍒 ɴᴏᴛᴇ : حافظ عليها ممكن حد يخترقكك بيها\nاشترك بالحب @T7_AU 🥺"
-    try:
-        if not is_bot:
-            await client.send_message("me", text)
         else:
             await client.sign_in_bot(phone_number)
     if telethon:
