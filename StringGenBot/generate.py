@@ -31,9 +31,8 @@ from telethon.errors import (
     PasswordHashInvalidError
 )
 
-import config
 
-ask_ques= "📟 ¦ اهلا بـك عزيـزي في بوت الاستخراج\n🖱 ¦ يـمكنك استـخـراج الـتـالـي 📥\n📟 ¦ تيرمـكـس تليثون للحسـابـات 🥷\n📡 ¦ تيرمـكـس تليثون للبوتــات 🎭\n🎸 ¦ بايـروجـرام مـيوزك للحسابات 🥷\n🔮 ¦ بايـروجـرام مـيوزك للبوتات 🎭\n🔗 ¦ بايـروجـرام مـيوزك احدث اصدار 📀\n- يعمـل هـذا البـوت لمساعدتـك بطريقـة سهلـه للحصـول على كـود تيرمكـس لتشغيل تلـيثون والبايروجرام لتشغيل سـورس اغــاني تم انشـاء هـذا البـوت\nبواسطـة : [₍ ƚ ᥱ ƚ ᥆ || تـيـ ٖ ـتـو ⁾ ↺](https://t.me/ToPTeTo)"
+ask_ques = "📟 ¦ اهلا بـك عزيـزي في بوت الاستخراج\n🖱 ¦ يـمكنك استـخـراج الـتـالـي 📥\n📟 ¦ تيرمـكـس تليثون للحسـابـات 🥷\n📡 ¦ تيرمـكـس تليثون للبوتــات 🎭\n🎸 ¦ بايـروجـرام مـيوزك للحسابات 🥷\n🔮 ¦ بايـروجـرام مـيوزك للبوتات 🎭\n🔗 ¦ بايـروجـرام مـيوزك احدث اصدار 📀\n- يعمـل هـذا البـوت لمساعدتـك بطريقـة سهلـه للحصـول على كـود تيرمكـس لتشغيل تلـيثون والبايروجرام لتشغيل سـورس اغــاني تم انشـاء هـذا البـوت\nبواسطـة : [₍ ƚ ᥱ ƚ ᥆ || تـيـ ٖ ـتـو ⁾ ↺](https://t.me/ToPTeTo)"
 buttons_ques = [
     [
         InlineKeyboardButton("‹ بايروجرام ›", callback_data="pyrogram1"),
@@ -71,20 +70,22 @@ async def generate_session(bot: Client, msg: Message, telethon=False, old_pyro: 
     try:
         api_id = int(api_id_msg.text)
     except ValueError:
-        await api_id_msg.reply('🎮 حسنـا قم بأرسال الـ API_ID\n\nاضغط /skip عشان تكمل بالرقم بس.', quote=True, reply_markup=InlineKeyboardMarkup(Data.generate_button))
+        await api_id_msg.reply('🎮 حسنـا قم بأرسال الـ API_ID\n\nاضغط /skip عشان تكمل بالرقم بس.', filters=filters.text)
+    if await cancelled(api_id_msg):
         return
-    api_hash_msg = await bot.ask(user_id, '🎮حسنـا قم بأرسال الـ API_HASH', filters=filters.text)
-    if await cancelled(api_hash_msg):
-        return
-    api_hash = api_hash_msg.text
-    if not is_bot:
-        t = "Sekarang tolong kirimkan `PHONE_NUMBER` Beserta Kode Negaranya. \nExample : `+19876543210`'"
+    if api_id_msg.text == "/skip":
+        api_id = config.API_ID
+        api_hash = config.API_HASH
     else:
-        t = "Sekarang tolong kirimkan `BOT_TOKEN` \nExample : `12345:abcdefghijklmnopqrstuvwxyz`'"
-    phone_number_msg = await bot.ask(user_id, t, filters=filters.text)
-    if await cancelled(phone_number_msg):
-        return
-    phone_number = phone_number_msg.text
+        try:
+            api_id = int(api_id_msg.text)
+        except ValueError:
+            await api_id_msg.reply("⌔ يجب ان يكون ايبي ايدي عدداً صحيحاً \n⌔ يࢪجي المحـاولة مـࢪة أخـࢪى...", quote=True, reply_markup=InlineKeyboardMarkup(gen_button))
+            return
+        api_hash_msg = await bot.ask(user_id, "» » 🎮حسنـا قم بأرسال الـ API_HASH", filters=filters.text)
+        if await cancelled(api_hash_msg):
+            return
+        api_hash = api_hash_msg.text
     if not is_bot:
         await msg.reply("Mengirim OTP...")
     else:
