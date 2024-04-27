@@ -190,13 +190,15 @@ async def generate_session(bot: Client, msg: Message, telethon=False, old_pyro: 
 
 async def cancelled(msg):
     if "/cancel" in msg.text:
-        await msg.reply("Membatalkan Proses!", quote=True, reply_markup=InlineKeyboardMarkup(Data.generate_button))
+        await msg.reply("⌔ **تم إلغاء عملية إنشاء الجلسة !**", quote=True, reply_markup=InlineKeyboardMarkup(gen_button))
         return True
     elif "/restart" in msg.text:
-        await msg.reply("Mulai ulang Bot!", quote=True, reply_markup=InlineKeyboardMarkup(Data.generate_button))
+        await msg.reply("⌔ ** تم بنجاح إعادة تشغيل هذا الروبوت !**", quote=True, reply_markup=InlineKeyboardMarkup(gen_button))
         return True
+    elif "/skip" in msg.text:
+        return False
     elif msg.text.startswith("/"):  # Bot Commands
-        await msg.reply("Membatalkan proses session!", quote=True)
+        await msg.reply("⌔ **تم إلغاء عملية إنشاء الجلسة !**", quote=True)
         return True
     else:
         return False
