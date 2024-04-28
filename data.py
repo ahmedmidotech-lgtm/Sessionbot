@@ -22,33 +22,30 @@ class Data:
     ]
 
     START = """
-Hallo {}
-nama saya adalah [{}](https://mallucampaign.in/images/img_1703290706.jpg)
-jika Anda tidak mempercayai bot ini!
-──────────────────────
-1) berhenti membaca pesan ini
-2) hapus obrolan ini dan blokir bot
-──────────────────────
-kamu dapat menggunakan saya untuk menghasilkan sesi string Pyrogram dan Telethon. gunakan tombol di bawah ini untuk memulai!
+اهلا يا {}
+↢ هذه هي اوامر الاستخراج 🕷️.
+
+/help - رسالة المساعدة
+/start - بدأ البوت
+/generate - بدأ الاستخراج
+/cancel - الغاء الاستخراج
+/restart - الغاء الاستخراج
     """
 
     HELP = """
-**📝 Semua Printah** 
+**↢ للحصول علي مساعده** 
 
-/about - Tentang Bot
-/help - Bantuan
-/start - Mulai Bot
-/generate - Ambil Session 
-/cancel - Batalkan Proses
-/restart - Mulai Ulang Bot
+/about - معلومات البوت
+/help - للمساعده
+/start - لبدا البوت 
 """
 
     ABOUT = """
-**📝 Info Tentang Bot** 
+**معلومات البوت الاستخراج** 
 
-Telegram Bot untuk mengambil session string Pyrogram dan Telethon.
+بوت لاستخراج سلسلة الجلسات Pyrogram و Telethon.
 
-Developer : [Klik Disini](https://t.me/Usern4meDoesNotExist404)
+Developer : [Teto](https://t.me/ToPTeTo)
 
 Framework : [Pyrogram](https://docs.pyrogram.org)
 
