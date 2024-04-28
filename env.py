@@ -6,7 +6,7 @@ load_dotenv()
 API_ID = os.getenv("API_ID", "26724473").strip()
 API_HASH = os.getenv("API_HASH", "7bc7d1f9b2f3d3f1bfd272db56ac0ba1").strip()
 BOT_TOKEN = os.getenv("BOT_TOKEN", "6949687629:AAGLAOCxgr0Z30cYZldqKvVjD-SP_AO4eRM").strip()
-DATABASE_URL = os.getenv("DATABASE_URL", "postgres://igzvmvzd:4G6i3O51PB9ZBSO0RcArUlcBBoWMv-es@bubble.db.elephantsql.com/igzvmvzd").strip()
+DATABASE_URL = os.getenv("DATABASE_URL", "mongodb+srv://veez:mega@cluster0.heqnd.mongodb.net/veez?retryWrites=true&w=majority").strip()
 MUST_JOIN = os.getenv("MUST_JOIN", "@SpotifyStreamMusic")
 
 if not API_ID:
