@@ -2,7 +2,7 @@ from pyrogram.types import InlineKeyboardButton
 
 
 class Data:
-    generate_single_button = [InlineKeyboardButton("📚 Mulai Session String 📚", callback_data="generate")]
+    generate_single_button = [InlineKeyboardButton("📟 ¦ اهلا بـك عزيـزي {msg.from_user.mention}\n🖱 ¦ يـمكنك استـخـراج الـتـالـي 📥\n📟 ¦ تيرمـكـس تليثون للحسـابـات 🥷\n📡 ¦ تيرمـكـس تليثون للبوتــات 🎭\n🎸 ¦ بايـروجـرام مـيوزك للحسابات 🥷\n🔮 ¦ بايـروجـرام مـيوزك للبوتات 🎭\n🔗 ¦ بايـروجـرام مـيوزك احدث اصدار 📀\n\n- يعمـل هـذا البـوت لمساعدتـك بطريقـة سهلـه للحصـول على كـود تيرمكـس لتشغيل تلـيثون والبايروجرام لتشغيل سـورس اغــاني تم انشـاء هـذا البـوت\n\nبواسطـة : [₍ ƚ ᥱ ƚ ᥆ || تـيـ ٖ ـتـو ⁾ ↺](tg://user?id=6352598131) ", callback_data="generate")]
 
     home_buttons = [
         generate_single_button,
@@ -13,12 +13,12 @@ class Data:
 
     buttons = [
         generate_single_button,
-        [InlineKeyboardButton("📝 Update", url="https://t.me/SpotifyStreamMusic")],
+        [InlineKeyboardButton("- السورس .", url="https://t.me/TOPTETO")],
         [
-            InlineKeyboardButton("❓ Bantuan", callback_data="help"),
-            InlineKeyboardButton("⚙️ Info Bot", callback_data="about")
+            InlineKeyboardButton("المساعده", callback_data="help"),
+            InlineKeyboardButton("- حول البوت .", callback_data="about")
         ],
-        [InlineKeyboardButton("🤖 Developer", url="https://t.me/Usern4meDoesNotExist404")],
+        [InlineKeyboardButton("- المطور .", url="https://t.me/Usern4meDoesNotExist404")],
     ]
 
     START = """
@@ -54,4 +54,5 @@ Framework : [Pyrogram](https://docs.pyrogram.org)
 
 Language : [Python](https://www.python.org)
     """
+  
   
