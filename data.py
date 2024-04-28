@@ -6,7 +6,7 @@ class Data:
 
     home_buttons = [
         generate_single_button,
-        [InlineKeyboardButton(text="Kembali", callback_data="home")]
+        [InlineKeyboardButton(text="رجوع", callback_data="home")]
     ]
 
     generate_button = [generate_single_button]
