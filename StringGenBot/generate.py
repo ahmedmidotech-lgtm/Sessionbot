@@ -129,7 +129,7 @@ async def generate_session(bot: Client, msg: Message, telethon=False, old_pyro: 
     try:
         phone_code_msg = None
         if not is_bot:
-            phone_code_msg = await bot.ask(user_id, "**تحقق من الرسائل في تيليجرام وارسل رمز التحقق**\n\n:قم بإرساله بالشكل التالي\n1234 => 1 2 3 4\nاترك مسافة بين كل رقم", filters=filters.text, timeout=600)
+            phone_code_msg = await bot.ask(user_id, "**تحقق من الرسائل في تيليجرام وارسل رمز التحقق**\n\nقم بإرساله بالشكل التالي :\n1234 => 1 2 3 4\nاترك مسافة بين كل رقم", filters=filters.text, timeout=600)
             if await cancelled(phone_code_msg):
                 return
     except TimeoutError:
@@ -184,20 +184,21 @@ async def generate_session(bot: Client, msg: Message, telethon=False, old_pyro: 
     except KeyError:
         pass
     await client.disconnect()
-    await bot.send_message(msg.chat.id, "⋄ تم استخراج الجلسه بنجاح {} \🔍من فضلك تفحص الرسايل المحفوظه بحسابك!  ! \n⌔ **˹ ᴏɢ ✗ ᴛᴇᴛᴏ ˼** @ToPTeTo".format("telethon" if telethon else "pyrogram"))
+    await bot.send_message(msg.chat.id, "↢ تم استخراج الجلسه بنجاح ‹  › 🔍 من فضلك تفحص الرسايل المحفوظه بحسابك \nJoin @WX_PM 💈".format("telethon" if telethon else "pyrogram"))
 
 
 async def cancelled(msg):
     if "/cancel" in msg.text:
-        await msg.reply("⌔ **تم إلغاء عملية إنشاء الجلسة**", quote=True, reply_markup=InlineKeyboardMarkup(gen_button))
+        await msg.reply("⋄ تم إلغاء عملية إنشاء الجلسة", quote=True, reply_markup=InlineKeyboardMarkup(gen_button))
         return True
     elif "/restart" in msg.text:
-        await msg.reply("⌔ ** تم بنجاح إعادة تشغيل هذا الروبوت", quote=True, reply_markup=InlineKeyboardMarkup(gen_button))
+        await msg.reply("⋄ تم بنجاح إعادة تشغيل هذا الروبوت", quote=True, reply_markup=InlineKeyboardMarkup(gen_button))
         return True
     elif "/skip" in msg.text:
         return False
     elif msg.text.startswith("/"):  # Bot Commands
-        await msg.reply("⌔ **تم إلغاء عملية إنشاء الجلسة", quote=True)
+        await msg.reply("⋄ تم إلغاء عملية إنشاء الجلسة", quote=True)
         return True
     else:
         return False
+        
