@@ -91,7 +91,7 @@ async def generate_session(bot: Client, msg: Message, telethon=False, old_pyro: 
             return
         api_hash = api_hash_msg.text
     if not is_bot:
-        t = "**⋄ الان قم بأرسال رقم الهاتف مع رمز الدوله\n↢ مثال +20123456789**"
+        t = "**⋄ الان قم بأرسال رقم الهاتف مع رمز الدوله\n↢ `مثال `+20123456789**"
     else:
         t = "⋄ ارسل الان توكن بوتك من @BotFather"
     phone_number_msg = await bot.ask(user_id, t, filters=filters.text)
@@ -129,7 +129,7 @@ async def generate_session(bot: Client, msg: Message, telethon=False, old_pyro: 
     try:
         phone_code_msg = None
         if not is_bot:
-            phone_code_msg = await bot.ask(user_id, "**تحقق من الرسائل في تيليجرام وارسل رمز التحقق**\n\nقم بإرساله بالشكل التالي :\n1234 => 1 2 3 4\nاترك مسافة بين كل رقم", filters=filters.text, timeout=600)
+            phone_code_msg = await bot.ask(user_id, "**تحقق من الرسائل في تيليجرام وارسل رمز التحقق**\n\nقم بإرساله بالشكل التالي :\n`1234` => 1 2 3 4\nاترك مسافة بين كل رقم", filters=filters.text, timeout=600)
             if await cancelled(phone_code_msg):
                 return
     except TimeoutError:
